@@ -3,5 +3,8 @@
 	"private": true,
 	"workspaces": [
 		"examples/*"
-	]
+	],
+	"devDependencies": {
+		"@types/aws-lambda": "8.10.159"
+	}
 }

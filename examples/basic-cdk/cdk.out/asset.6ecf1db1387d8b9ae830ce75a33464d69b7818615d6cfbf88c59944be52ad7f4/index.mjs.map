@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../function.ts"],
-  "sourcesContent": ["export const handler = async () => {\n\tconsole.log(\"hello from Lambda\");\n};\n"],
-  "mappings": "AAAO,IAAMA,EAAU,SAAY,CAClC,QAAQ,IAAI,mBAAmB,CAChC",
-  "names": ["handler"]
-}
