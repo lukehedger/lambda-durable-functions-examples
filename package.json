@@ -1,0 +1,7 @@
+{
+	"name": "lambda-durable-functions-examples",
+	"private": true,
+	"workspaces": [
+		"examples/*"
+	]
+}

@@ -1,0 +1,117 @@
+{
+ "Resources": {
+  "BasicCdkServiceRole872E269B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicDurableExecutionRolePolicy"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BasicCdk/BasicCdk/ServiceRole/Resource"
+   }
+  },
+  "BasicCdkA75E0848": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-us-east-2"
+     },
+     "S3Key": "42b97175b259a2374aa220c1baf2d578976d249274667d0e47d902423a67f646.zip"
+    },
+    "DurableConfig": {
+     "ExecutionTimeout": 60,
+     "RetentionPeriodInDays": 1
+    },
+    "FunctionName": "basic-cdk",
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "BasicCdkServiceRole872E269B",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs24.x"
+   },
+   "DependsOn": [
+    "BasicCdkServiceRole872E269B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BasicCdk/BasicCdk/Resource",
+    "aws:asset:path": "asset.42b97175b259a2374aa220c1baf2d578976d249274667d0e47d902423a67f646",
+    "aws:asset:is-bundled": true,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zXNOw6DMBBF0bXQD5PEzgYCUsoUZgFoMAMyH1ti7FAg9h4BSnWqd59CpRU+Mlolt+2YT67BrYpkR6BV6m2iuWmp9qHlQfBz8k7eRhc8OJpxM2FiKDt/uIPomkQ4Cr4OQDQWyY4cCxKGq4Zl5/+NHQxLSItlOAdVpN75fofjEQe5fdUTNd6zQZzLl+SjmxnN5Q/SYdrTvQAAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "BasicCdk/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
