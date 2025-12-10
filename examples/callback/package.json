@@ -1,0 +1,19 @@
+{
+	"name": "callback",
+	"scripts": {
+		"cdk": "cdk"
+	},
+	"devDependencies": {
+		"@types/bun": "latest",
+		"aws-cdk": "2.1033.0",
+		"aws-cdk-lib": "2.232.1",
+		"esbuild": "0.27.1"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"@aws-sdk/client-lambda": "3.947.0",
+		"@aws/durable-execution-sdk-js": "1.0.0"
+	}
+}
