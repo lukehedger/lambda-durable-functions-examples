@@ -1,0 +1,13 @@
+{
+	"name": "testing",
+	"devDependencies": {
+		"@aws/durable-execution-sdk-js-testing": "1.0.0",
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"dependencies": {
+		"@aws/durable-execution-sdk-js": "1.0.0"
+	}
+}
