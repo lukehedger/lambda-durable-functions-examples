@@ -4,6 +4,7 @@
 		"cdk": "cdk"
 	},
 	"devDependencies": {
+		"@types/aws-lambda": "8.10.159",
 		"@types/bun": "latest",
 		"aws-cdk": "2.1033.0",
 		"aws-cdk-lib": "2.232.1",

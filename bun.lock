@@ -3,8 +3,20 @@
   "workspaces": {
     "": {
       "name": "lambda-durable-functions-examples",
+    },
+    "examples/api-gateway": {
+      "name": "api-gateway",
+      "dependencies": {
+        "@aws/durable-execution-sdk-js": "1.0.0",
+      },
       "devDependencies": {
-        "@types/aws-lambda": "8.10.159",
+        "@types/bun": "latest",
+        "aws-cdk": "2.1033.0",
+        "aws-cdk-lib": "2.232.1",
+        "esbuild": "0.27.1",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
       },
     },
     "examples/basic-cdk": {
@@ -29,6 +41,7 @@
         "@aws/durable-execution-sdk-js": "1.0.0",
       },
       "devDependencies": {
+        "@types/aws-lambda": "8.10.159",
         "@types/bun": "latest",
         "aws-cdk": "2.1033.0",
         "aws-cdk-lib": "2.232.1",
@@ -40,6 +53,37 @@
     },
     "examples/lambda-orchestration": {
       "name": "lambda-orchestration",
+      "dependencies": {
+        "@aws/durable-execution-sdk-js": "1.0.0",
+      },
+      "devDependencies": {
+        "@types/bun": "latest",
+        "aws-cdk": "2.1033.0",
+        "aws-cdk-lib": "2.232.1",
+        "esbuild": "0.27.1",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
+    "examples/testing": {
+      "name": "testing",
+      "dependencies": {
+        "@aws/durable-execution-sdk-js": "1.0.0",
+      },
+      "devDependencies": {
+        "@aws/durable-execution-sdk-js-testing": "1.0.0",
+        "@types/bun": "latest",
+        "aws-cdk": "2.1033.0",
+        "aws-cdk-lib": "2.232.1",
+        "esbuild": "0.27.1",
+      },
+      "peerDependencies": {
+        "typescript": "^5",
+      },
+    },
+    "examples/workflow": {
+      "name": "workflow",
       "dependencies": {
         "@aws/durable-execution-sdk-js": "1.0.0",
       },
@@ -121,6 +165,8 @@
 
     "@aws/durable-execution-sdk-js": ["@aws/durable-execution-sdk-js@1.0.0", "", { "dependencies": { "@aws-sdk/client-lambda": "*" } }, "sha512-39KUAeifixqZ6kitnKdEF5RmLd44Xb4gI3/9N0icrSDE5i0kwIxYf/9PhKQrOQq7oe95fkPJ5AVRibx1/b7fIw=="],
 
+    "@aws/durable-execution-sdk-js-testing": ["@aws/durable-execution-sdk-js-testing@1.0.0", "", { "dependencies": { "@aws-sdk/client-lambda": "*", "@sinonjs/fake-timers": "^13.0.5", "@smithy/smithy-client": "^4.9.1" }, "peerDependencies": { "@aws/durable-execution-sdk-js": "*" }, "bin": { "run-durable": "dist/cli/run-durable.js" } }, "sha512-TbGbLi/+fSolwQ5gHgJbdYCxPs3y8vLmYo4o4Z48kiYyFCzNQU68GCX65yjp7AB8OU5n8Rt6X2yvR5/wHy96dw=="],
+
     "@aws/lambda-invoke-store": ["@aws/lambda-invoke-store@0.2.2", "", {}, "sha512-C0NBLsIqzDIae8HFw9YIrIBsbc0xTiOtt7fAukGPnqQ/+zZNaq+4jhuccltK0QuWHBnNm/a6kLIRA6GFiM10eg=="],
 
     "@balena/dockerignore": ["@balena/dockerignore@1.0.2", "", {}, "sha512-wMue2Sy4GAVTk6Ic4tJVcnfdau+gx2EnG7S+uAEe+TWJFqE4YoWN4/H8MSLj4eYJKxGg26lZwboEniNiNwZQ6Q=="],
@@ -176,6 +222,10 @@
     "@esbuild/win32-ia32": ["@esbuild/win32-ia32@0.27.1", "", { "os": "win32", "cpu": "ia32" }, "sha512-2BR5M8CPbptC1AK5JbJT1fWrHLvejwZidKx3UMSF0ecHMa+smhi16drIrCEggkgviBwLYd5nwrFLSl5Kho96RQ=="],
 
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.27.1", "", { "os": "win32", "cpu": "x64" }, "sha512-d5X6RMYv6taIymSk8JBP+nxv8DQAMY6A51GPgusqLdK9wBz5wWIXy1KjTck6HnjE9hqJzJRdk+1p/t5soSbCtw=="],
+
+    "@sinonjs/commons": ["@sinonjs/commons@3.0.1", "", { "dependencies": { "type-detect": "4.0.8" } }, "sha512-K3mCHKQ9sVh8o1C9cxkwxaOmXoAMlDxC1mYyHrjqOWEcBjYr76t96zL2zlj5dUGZ3HSw240X1qgH3Mjf1yJWpQ=="],
+
+    "@sinonjs/fake-timers": ["@sinonjs/fake-timers@13.0.5", "", { "dependencies": { "@sinonjs/commons": "^3.0.1" } }, "sha512-36/hTbH2uaWuGVERyC6da9YwGWnzUZXuPro/F2LfsdOsLnCojz/iSH8MxUt/FD2S5XBSVPhmArFUXcpCQ2Hkiw=="],
 
     "@smithy/abort-controller": ["@smithy/abort-controller@4.2.5", "", { "dependencies": { "@smithy/types": "^4.9.0", "tslib": "^2.6.2" } }, "sha512-j7HwVkBw68YW8UmFRcjZOmssE77Rvk0GWAIN1oFBhsaovQmZWYCIcGa9/pwRB0ExI8Sk9MWNALTjftjHZea7VA=="],
 
@@ -281,6 +331,8 @@
 
     "ansi-styles": ["ansi-styles@4.3.0", "", { "dependencies": { "color-convert": "^2.0.1" } }, "sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg=="],
 
+    "api-gateway": ["api-gateway@workspace:examples/api-gateway"],
+
     "astral-regex": ["astral-regex@2.0.0", "", {}, "sha512-Z7tMw1ytTXt5jqMcOP+OQteU1VuNK9Y02uuJtKQ1Sv69jXQKKg5cibLwGJow8yzZP+eAc18EmLGPal0bp36rvQ=="],
 
     "aws-cdk": ["aws-cdk@2.1033.0", "", { "optionalDependencies": { "fsevents": "2.3.2" }, "bin": { "cdk": "bin/cdk" } }, "sha512-Pit2k7cVAwxoYI7RMVsOyltuy7/HGENLupJ4KAm/d8mGzOfX+SLOo9YQsx5CKY9J6ErCZ1ViLerklTfjytvQww=="],
@@ -361,13 +413,19 @@
 
     "table": ["table@6.9.0", "", { "dependencies": { "ajv": "^8.0.1", "lodash.truncate": "^4.4.2", "slice-ansi": "^4.0.0", "string-width": "^4.2.3", "strip-ansi": "^6.0.1" } }, "sha512-9kY+CygyYM6j02t5YFHbNz2FN5QmYGv9zAjVp4lCDjlCw7amdckXlEt/bjMhUIfj4ThGRE4gCUH5+yGnNuPo5A=="],
 
+    "testing": ["testing@workspace:examples/testing"],
+
     "tslib": ["tslib@2.8.1", "", {}, "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="],
+
+    "type-detect": ["type-detect@4.0.8", "", {}, "sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g=="],
 
     "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
 
     "undici-types": ["undici-types@7.16.0", "", {}, "sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw=="],
 
     "universalify": ["universalify@2.0.1", "", {}, "sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw=="],
+
+    "workflow": ["workflow@workspace:examples/workflow"],
 
     "yaml": ["yaml@1.10.2", "", {}, "sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg=="],
 
