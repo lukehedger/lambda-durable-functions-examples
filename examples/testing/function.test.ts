@@ -1,12 +1,13 @@
-import { afterAll, beforeAll, expect, test } from "bun:test";
+import { equal } from "node:assert/strict";
+import { test } from "node:test";
 import { LocalDurableTestRunner } from "@aws/durable-execution-sdk-js-testing";
 import { handler } from "./function";
 
-beforeAll(async () => {
+test.beforeEach(async () => {
 	await LocalDurableTestRunner.setupTestEnvironment({ skipTime: true });
 });
 
-afterAll(async () => {
+test.afterEach(async () => {
 	await LocalDurableTestRunner.teardownTestEnvironment();
 });
 
@@ -17,6 +18,6 @@ test("addition works correctly", async () => {
 		payload: { a: 5, b: 3 },
 	});
 
-	expect(result.getStatus()).toBe("SUCCEEDED");
-	expect(result.getResult()).toEqual(8);
+	equal(result.getStatus(), "SUCCEEDED");
+	equal(result.getResult(), 8);
 });

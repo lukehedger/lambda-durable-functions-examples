@@ -1,13 +1,17 @@
 {
 	"name": "testing",
-	"devDependencies": {
-		"@aws/durable-execution-sdk-js-testing": "1.0.0",
-		"@types/bun": "latest"
-	},
-	"peerDependencies": {
-		"typescript": "^5"
+	"scripts": {
+		"test": "node --import tsx --test"
 	},
 	"dependencies": {
 		"@aws/durable-execution-sdk-js": "1.0.0"
+	},
+	"devDependencies": {
+		"@aws/durable-execution-sdk-js-testing": "1.0.0",
+		"@types/bun": "latest",
+		"tsx": "4.21.0"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
 	}
 }
