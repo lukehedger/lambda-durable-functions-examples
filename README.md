@@ -7,7 +7,7 @@ A growing collection of examples demonstrating how to use Lambda durable functio
 - [API Gateway trigger](/examples/api-gateway)
 - [Basic CDK](/examples/basic-cdk)
 - [Async callback](/examples/callback)
-- [Lambda orchestration](/examples/orchestration)
+- [Lambda orchestration](/examples/lambda-orchestration)
 - [Unit testing](/examples/testing)
 - [Branching workflow](/examples/workflow)
 
