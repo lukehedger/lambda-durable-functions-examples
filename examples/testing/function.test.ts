@@ -1,13 +1,25 @@
-import { equal } from "node:assert/strict";
-import { test } from "node:test";
+import { afterAll, beforeAll, expect, test } from "bun:test";
+import {
+	type DurableContext,
+	withDurableExecution,
+} from "@aws/durable-execution-sdk-js";
 import { LocalDurableTestRunner } from "@aws/durable-execution-sdk-js-testing";
-import { handler } from "./function";
 
-test.beforeEach(async () => {
+const handler = withDurableExecution(async (event, context: DurableContext) => {
+	console.log(event);
+
+	const result = await context.step("calculate", async () => {
+		return event.a + event.b;
+	});
+
+	return result;
+});
+
+beforeAll(async () => {
 	await LocalDurableTestRunner.setupTestEnvironment({ skipTime: true });
 });
 
-test.afterEach(async () => {
+afterAll(async () => {
 	await LocalDurableTestRunner.teardownTestEnvironment();
 });
 
@@ -18,6 +30,6 @@ test("addition works correctly", async () => {
 		payload: { a: 5, b: 3 },
 	});
 
-	equal(result.getStatus(), "SUCCEEDED");
-	equal(result.getResult(), 8);
+	expect(result.getStatus()).toBe("SUCCEEDED");
+	expect(result.getResult()).toEqual(8);
 });
