@@ -6,6 +6,7 @@ A growing collection of examples demonstrating how to use Lambda durable functio
 
 - [API Gateway trigger](/examples/api-gateway)
 - [Basic CDK](/examples/basic-cdk)
+- [Basic error handling](/examples/basic-error-handling)
 - [Async callback](/examples/callback)
 - [Lambda orchestration](/examples/lambda-orchestration)
 - [Unit testing](/examples/testing)
@@ -13,11 +14,17 @@ A growing collection of examples demonstrating how to use Lambda durable functio
 
 ## Concepts
 
-### `withDurableExecution` wrapper
+### SDK
+
+The durable execution SDK provides the primitives you need to build durable functions on Lambda, including the `withDurableExecution` function wrapper and `DurableContext` type.
+
+The SDK is available on [GitHub](https://github.com/aws/aws-durable-execution-sdk-js).
+
+#### `withDurableExecution` wrapper
 
 A durable Lambda function must be wrapped with the `withDurableExecution` wrapper. The wrapper enables durable execution by providing the [`DurableContext`](#durablecontext) object and managing checkpoint operations.
 
-### `DurableContext`
+#### `DurableContext`
 
 A durable function receives a `DurableContext` instead of the [standard Lambda context](https://docs.aws.amazon.com/lambda/latest/dg/nodejs-context.html).
 
@@ -49,4 +56,57 @@ For more information, see [Write deterministic code](https://docs.aws.amazon.com
 
 ### Versioning
 
- Durable functions must be invoked with version numbers or aliases (using a fully qualified ARN). This ensures each execution is pinned to specific versions of your function's code.
+Durable functions must be invoked with version numbers or aliases (using a fully qualified ARN). This ensures each execution is pinned to specific versions of your function's code.
+
+### Error handling
+
+You should always handle transient errors, such as network request timeouts, rate limiting and temporary service unavailability, in your durable functions. You should not retry permanent failures, such as bad requests or authentication issues.
+
+The durable execution SDK allows you to configure **retry strategies** with appropriate maximum attempts and backoff rates for the steps in your durable functions.
+
+#### Retry strategies
+
+Each step can be configured with a retry strategy that defines how to handle transient failures.
+
+There are several ways to define a retry strategy for a step:
+
+1. `retryPresets`
+
+The durable execution SDK includes the `retryPresets` module, which provides a set of built-in retry strategies.
+
+```ts
+import { retryPresets } from "@aws/durable-execution-sdk-js";
+
+await context.step("make-request", async () => someHttpRequest(), {
+  // 5 retry attempts with exponential backoff rate of 2x
+	retryStrategy: retryPresets.default,
+});
+```
+
+2. Custom retry strategy
+
+```ts
+await context.step("make-request", async () => someHttpRequest(), {
+  retryStrategy: (error, attemptCount) => ({
+    delay: { seconds: attemptCount * 2 },
+    shouldRetry: attemptCount <= 3,
+  }),
+});
+```
+
+3. Custom retry strategy with `createRetryStrategy` utility
+
+```ts
+import {
+  createRetryStrategy,
+  JitterStrategy,
+} from "@aws/durable-execution-sdk-js";
+
+const retryStrategy = createRetryStrategy({
+  exponentialDelayFactor: 2,
+  initialDelay: { seconds: 1 },
+  jitterStrategy: JitterStrategy.FULL,
+  maxAttempts: 3,
+  maxDelay: { seconds: 60 },
+});
+```
