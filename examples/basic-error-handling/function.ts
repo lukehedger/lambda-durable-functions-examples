@@ -18,8 +18,6 @@ export const handler = withDurableExecution(
 				},
 			);
 
-			await context.wait({ seconds: 1 });
-
 			await context.step(
 				"process-payment",
 				async (ctx) => {
