@@ -3,6 +3,6 @@ import { Callback } from "./stack";
 
 new Callback(new App(), "Callback", {
 	env: {
-		region: "us-east-2", // note: durable functions currently only supported in us-east-2
+		region: "eu-central-1",
 	},
 });

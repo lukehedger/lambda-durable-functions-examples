@@ -3,6 +3,6 @@ import { ApiGateway } from "./stack";
 
 new ApiGateway(new App(), "ApiGateway", {
 	env: {
-		region: "us-east-2", // note: durable functions currently only supported in us-east-2
+		region: "eu-central-1",
 	},
 });
