@@ -15,6 +15,14 @@ A growing collection of examples demonstrating how to use Lambda durable functio
 
 ## Concepts
 
+- [SDK](#sdk)
+- [Steps](#steps)
+- [Waits](#waits)
+- [Checkpoints](#checkpoints)
+- [Determinism](#determinism)
+- [Versioning](#versioning)
+- [Error handling](#error-handling)
+
 ### SDK
 
 The durable execution SDK provides the primitives you need to build durable functions on Lambda, including the `withDurableExecution` function wrapper and `DurableContext` type.
