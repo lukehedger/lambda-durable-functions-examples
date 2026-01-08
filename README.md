@@ -9,6 +9,7 @@ A growing collection of examples demonstrating how to use Lambda durable functio
 - [Basic error handling](/examples/basic-error-handling)
 - [Async callback](/examples/callback)
 - [Lambda orchestration](/examples/lambda-orchestration)
+- [Saga pattern](/examples/saga)
 - [Unit testing](/examples/testing)
 - [Branching workflow](/examples/workflow)
 
